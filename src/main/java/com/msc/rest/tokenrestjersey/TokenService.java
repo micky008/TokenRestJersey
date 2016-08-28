@@ -16,9 +16,10 @@ import java.util.UUID;
  */
 public class TokenService {
 
-    private static final long WAITING = 10000; //(30 * 60 * 1000); //30min
-
     public static boolean DEBUG_MODE = false;
+
+    private static final long WAITING = (DEBUG_MODE ? 10000 : 1800000); //10sec ou 30min
+
 
     private static volatile Map<Integer, Token> tokens = new HashMap<>();
 
