@@ -40,7 +40,7 @@ public class TokenFilter implements ContainerRequestFilter {
 
         try {
             // Validate the token
-            validateToken(authorizationHeader);
+            validateToken(idUserName, authorizationHeader);
 
         } catch (Exception e) {
             requestContext.abortWith(
@@ -48,10 +48,10 @@ public class TokenFilter implements ContainerRequestFilter {
         }
     }
 
-    private void validateToken(String token) throws Exception {
+    private void validateToken(String userConnecter, String token) throws Exception {
         Token t = new Token();
         t.setToken(token);
-        if (!TokenService.isTockenExist(t)) {
+        if (!TokenService.isTockenExist(Integer.parseInt(userConnecter), t)) {
             throw new Exception();
         }
     }

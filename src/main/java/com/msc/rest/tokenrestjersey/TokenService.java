@@ -40,8 +40,8 @@ public class TokenService {
         return t;
     }
 
-    public static synchronized boolean isTockenExist(Token token) {
-        return tokens.containsValue(token);
+    public static synchronized boolean isTockenExist(Integer idConnecter, Token token) {
+        return tokens.get(idConnecter).equals(token);
     }
 
     public static synchronized void removeToken(Integer idPersonne) {
