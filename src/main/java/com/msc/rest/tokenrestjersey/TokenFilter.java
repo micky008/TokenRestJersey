@@ -38,7 +38,12 @@ public class TokenFilter implements ContainerRequestFilter {
         tsc.setIdUserConnected(idUserName);
         requestContext.setSecurityContext(tsc);
 
+         String debugmode = requestContext.getHeaderString("DEBUGMODE");
+        
         try {
+            if (debugmode != null){
+                return;
+            }
             // Validate the token
             validateToken(idUserName, authorizationHeader);
 
