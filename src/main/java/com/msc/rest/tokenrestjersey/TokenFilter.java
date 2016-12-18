@@ -22,12 +22,13 @@ import javax.ws.rs.ext.Provider;
 @Priority(Priorities.AUTHENTICATION)
 public class TokenFilter implements ContainerRequestFilter {
 
+    public static  boolean debugMode = false;
+    
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         // Get the HTTP Authorization header from the request
      
-        String debugmode = requestContext.getHeaderString("DEBUGMODE");
-        if (debugmode != null) {
+        if (debugMode) {
             return;
         }
         
