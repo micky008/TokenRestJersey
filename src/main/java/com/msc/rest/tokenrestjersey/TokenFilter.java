@@ -25,8 +25,13 @@ public class TokenFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         // Get the HTTP Authorization header from the request
+     
+        String debugmode = requestContext.getHeaderString("DEBUGMODE");
+        if (debugmode != null) {
+            return;
+        }
+        
         String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
-
         // Check if the HTTP Authorization header is present and formatted correctly
         if (authorizationHeader == null) {
             throw new NotAuthorizedException("Authorization header must be provided");
@@ -38,12 +43,8 @@ public class TokenFilter implements ContainerRequestFilter {
         tsc.setIdUserConnected(idUserName);
         requestContext.setSecurityContext(tsc);
 
-         String debugmode = requestContext.getHeaderString("DEBUGMODE");
-        
         try {
-            if (debugmode != null){
-                return;
-            }
+
             // Validate the token
             validateToken(idUserName, authorizationHeader);
 
