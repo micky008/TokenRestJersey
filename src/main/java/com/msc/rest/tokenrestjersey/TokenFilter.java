@@ -22,25 +22,27 @@ import javax.ws.rs.ext.Provider;
 @Priority(Priorities.AUTHENTICATION)
 public class TokenFilter implements ContainerRequestFilter {
 
-    public static  boolean debugMode = false;
-    
+    public static boolean debugMode = false;
+
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         // Get the HTTP Authorization header from the request
-     
+
         if (debugMode) {
+            TokenSecurityContext tsc = new TokenSecurityContext();
+            tsc.setIdUserConnected("1");
+            requestContext.setSecurityContext(tsc);
             return;
         }
-        
+
         String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
         // Check if the HTTP Authorization header is present and formatted correctly
         if (authorizationHeader == null) {
             throw new NotAuthorizedException("Authorization header must be provided");
         }
 
-        String idUserName = requestContext.getHeaderString(HttpHeaders.ALLOW);
-
         TokenSecurityContext tsc = new TokenSecurityContext();
+        String idUserName = requestContext.getHeaderString(HttpHeaders.ALLOW);
         tsc.setIdUserConnected(idUserName);
         requestContext.setSecurityContext(tsc);
 
