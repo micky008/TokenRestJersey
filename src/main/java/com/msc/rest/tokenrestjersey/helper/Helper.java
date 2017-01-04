@@ -7,7 +7,7 @@ import com.msc.rest.tokenrestjersey.TokenEntity;
  * @author micky
  * @param <T>
  */
-public class Helper<T> extends TokenEntity  {
+public class Helper<T> extends TokenEntity {
 
     private T myObject;
 
@@ -22,5 +22,4 @@ public class Helper<T> extends TokenEntity  {
         this.myObject = obj;
     }
 
-  
 }
