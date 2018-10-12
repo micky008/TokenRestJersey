@@ -15,7 +15,6 @@ public class TokenEntity {
 
     private Token token;
 
-
     /**
      * @return the token
      */

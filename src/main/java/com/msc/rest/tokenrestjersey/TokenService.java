@@ -20,7 +20,6 @@ public class TokenService {
 
     private static final long WAITING = (DEBUG_MODE ? 10000 : 1800000); //10sec ou 30min
 
-
     private static volatile Map<Integer, Token> tokens = new HashMap<>();
 
     public static synchronized Token getNewToken(Integer idPersonne) {
